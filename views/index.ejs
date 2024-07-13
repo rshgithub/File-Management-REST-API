@@ -1,0 +1,24 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Management</title>
+    <link rel="stylesheet" href="./public/styles.css">
+</head>
+<body>
+    <h1>File List</h1>
+    <form action="/files/search" method="GET">
+        <label for="query">Search Files:</label>
+        <input type="text" id="query" name="query" placeholder="Enter file name">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        <% files.forEach(file => { %>
+        <li><a href="/files/<%= file %>"><%= file %></a></li>
+        <% }); %>
+    </ul>
+    <a href="/files/createForm">Create New File</a>
+</body>
+</html>

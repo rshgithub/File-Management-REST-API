@@ -1,0 +1,50 @@
+<!-- views/detail.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Details - <%= filename %></title>
+    <link rel="stylesheet" href="./public/styles.css">
+</head>
+<body>
+    <h1>File Details - <%= filename %></h1>
+    <pre><%= content %></pre>
+    
+    <!-- Form for updating file -->
+    <form action="/files/<%= filename %>/update" method="post">
+        <label for="newFilename">New Filename:</label>
+        <input type="text" id="newFilename" name="newFilename" value="<%= filename %>" required />
+        <br />
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" required><%= content %></textarea>
+        <br />
+        <button type="submit">Update</button>
+    </form>
+    
+    <!-- Form for deleting file -->
+    <form action="/files/<%= filename %>/delete" method="post">
+        <button type="submit">Delete</button>
+    </form>
+    
+    <!-- Link to go back to file listing -->
+    <a href="/">Back to File Listing</a>
+    
+    <!-- Additional options for file management -->
+    <div>
+        <h2>Additional Options</h2>
+        <ul>
+            <li>
+                <a href="/files/<%= filename %>/compress">Download Compressed</a>
+            </li>
+            <li>
+                <a href="/files/<%= filename %>/encrypt">Encrypt File</a>
+            </li>
+            <li>
+                <a href="/files/<%= filename %>/decrypt">Decrypt File</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

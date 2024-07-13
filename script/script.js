@@ -1,0 +1,1 @@
+// scripts.js - For client-side scripting
