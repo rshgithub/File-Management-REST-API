@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const multer = require('multer'); // to let users can upload files to the server.
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index.js');
 const filesRouter = require('./routes/files.js');
@@ -12,7 +13,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.set('view engine', 'ejs'); // Set EJS as the view engine
 app.use(express.static(path.join(__dirname, 'public')));
-
+ 
 
 // Routes
 app.use('/', indexRouter);  

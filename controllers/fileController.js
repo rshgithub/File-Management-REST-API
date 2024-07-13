@@ -5,6 +5,7 @@ const path = require("path");
 const archiver = require("archiver"); // For File Compression
 const crypto = require("crypto");
 
+
 // Render create file form
 const renderCreateForm = async (req, res, next) => {
   try {
@@ -59,7 +60,7 @@ const deleteFile = async (req, res, next) => {
 };
 
 // Render update file form
-const getUpdateFileForm = async (req, res, next) => {
+const renderUpdateFileForm = async (req, res, next) => {
   const { filename } = req.params;
   try {
     res.render("update", { filename });
@@ -187,15 +188,49 @@ const decryptFile = async (req, res, next) => {
     }
 };
 
+
+// Render file upload form
+const renderUploadForm = async ( req, res, next) => {
+    try {
+        res.render('upload');
+    } catch (err) {
+        next(err);
+    }
+};
+
+// Handle file upload
+const uploadFile = async (req, res, next) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+  
+      const { originalname, filename, path: filePath } = req.file;
+  
+      // Move the uploaded file to the data directory
+      const dataDir = path.join(__dirname, '..', 'data');
+      await fs.ensureDir(dataDir); 
+      await fs.move(filePath, path.join(dataDir, filename));
+  
+      res.redirect("/");
+    } catch (err) {
+      console.error('Error uploading file:', err);
+      next(err);
+    }
+  };
+  
+
 module.exports = {
   renderCreateForm,
   create,
   viewFileContent,
   deleteFile,
-  getUpdateFileForm,
+  renderUpdateFileForm,
   updateFile,
   searchFiles,
   compressFile,
   encryptFile,
   decryptFile,
+  renderUploadForm,
+  uploadFile,
 };

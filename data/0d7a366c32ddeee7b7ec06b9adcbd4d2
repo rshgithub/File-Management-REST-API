@@ -1,0 +1,64 @@
+
+// Given a non-empty array of integers nums, every element appears twice except for one. Find that single one. 
+// Example 1:
+// Input: nums = [2,2,1]
+// Output: 1
+
+// Example 2:
+// Input: nums = [4,1,2,1,2]
+// Output: 4
+
+// Example 3:
+// Input: nums = [1]
+// Output: 1
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Arrays;
+
+public class UniqueNumberFinder {
+
+
+   // First Solution using one For Loop 
+   // XOR method has a time complexity of O(n) and a space complexity of O(1).
+    public static int theUniqueNumberFirstSolution(int[] myArray) {
+        
+        int result = 0;
+        for (int num : myArray) {
+            result ^= num; // result = result ^ num
+            }
+            return result;
+          }
+    
+    
+        // Third Solution using Set 
+        public static int theUniqueNumberSecoundSolution(int[] nums) {  
+            HashSet<Integer> set = new HashSet<>();
+            for (int num : nums) {
+                if (!set.add(num)) {
+                    set.remove(num);
+                }
+            }
+            return set.iterator().next(); // to get the first and ONLY UNIQUE number we got .
+        }
+
+        
+
+    public static void main(String[] args) {
+        
+        System.out.println(" First Solution using For Loop : \n"  ); 
+            
+        System.out.println("Example 1 : for the Array [2,2,1] the unique number = " + theUniqueNumberFirstSolution(new int[]{2, 2, 1})); 
+        System.out.println("Example 2 : for the Array [4,1,2,1,2] the unique number = " + theUniqueNumberFirstSolution(new int[]{4, 1, 2, 1, 2})); 
+        System.out.println("Example 3 : for the Array [1] the unique number = " + theUniqueNumberFirstSolution(new int[]{1}));  
+        
+        System.out.println(" -------------------------------------- \n"); 
+        System.out.println(" Secound Solution using For Set \n"); 
+        
+        System.out.println("Example 1 : for the Array [2,2,1] the unique number = " + theUniqueNumberSecoundSolution(new int[]{2, 2, 1})); 
+        System.out.println("Example 2 : for the Array [4,1,2,1,2] the unique number = " + theUniqueNumberSecoundSolution(new int[]{4, 1, 2, 1, 2})); 
+        System.out.println("Example 3 : for the Array [1] the unique number = " + theUniqueNumberSecoundSolution(new int[]{1})); 
+
+
+    }
+}
